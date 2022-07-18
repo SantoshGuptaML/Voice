@@ -74,6 +74,7 @@ class BookPlayViewModel
 
   fun playPause() {
     player.playPause()
+    sleepTimer.setActive(true)
   }
 
   fun rewind() {
