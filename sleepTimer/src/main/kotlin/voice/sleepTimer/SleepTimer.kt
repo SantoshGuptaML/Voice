@@ -36,7 +36,7 @@ class SleepTimer
 
   private val scope = MainScope()
   private val sleepTime: Duration get() = sleepTimePref.value.minutes
-  private val fadeOutDuration = 10.seconds
+  private val fadeOutDuration = 3600.seconds // was 1.seconds earlier 
 
   private val _leftSleepTime = MutableStateFlow(Duration.ZERO)
   private var leftSleepTime: Duration
@@ -100,8 +100,8 @@ class SleepTimer
       (leftSleepTime / fadeOutDuration).toFloat()
     }.coerceIn(0F, 1F)
 
-    val volume = 1 - FastOutSlowInInterpolator().getInterpolation(1 - percentageOfTimeLeft)
-    playerController.setVolume(volume)
+    // val volume = 1 - FastOutSlowInInterpolator().getInterpolation(1 - percentageOfTimeLeft)
+    // playerController.setVolume(volume)
   }
 
   private suspend fun suspendUntilPlaying() {
