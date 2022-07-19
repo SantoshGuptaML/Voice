@@ -36,7 +36,7 @@ class SleepTimer
 
   private val scope = MainScope()
   private val sleepTime: Duration get() = sleepTimePref.value.minutes
-  private val fadeOutDuration = 3600.seconds // was 1.seconds earlier 
+  private val fadeOutDuration = 0.seconds // was 1.seconds earlier 
 
   private val _leftSleepTime = MutableStateFlow(Duration.ZERO)
   private var leftSleepTime: Duration
@@ -66,7 +66,7 @@ class SleepTimer
     sleepJob?.cancel()
     sleepJob = scope.launch {
       startSleepTimerCountdown()
-      val shakeToResetTime = 30.seconds
+      val shakeToResetTime = 3600.seconds // was like 30 seconds
       Logger.d("Wait for $shakeToResetTime for a shake")
       withTimeout(shakeToResetTime) {
         shakeDetector.detect()
@@ -84,13 +84,13 @@ class SleepTimer
       suspendUntilPlaying()
       if (leftSleepTime < fadeOutDuration) {
         interval = 200.milliseconds
-        updateVolumeForSleepTime()
+        // updateVolumeForSleepTime()
       }
       delay(interval)
       leftSleepTime = (leftSleepTime - interval).coerceAtLeast(Duration.ZERO)
     }
     playerController.pauseWithRewind(fadeOutDuration)
-    playerController.setVolume(1F)
+    // playerController.setVolume(1F)
   }
 
   private fun updateVolumeForSleepTime() {
