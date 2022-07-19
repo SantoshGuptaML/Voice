@@ -84,13 +84,13 @@ class SleepTimer
       suspendUntilPlaying()
       if (leftSleepTime < fadeOutDuration) {
         interval = 200.milliseconds
-        updateVolumeForSleepTime()
+        // updateVolumeForSleepTime()
       }
       delay(interval)
       leftSleepTime = (leftSleepTime - interval).coerceAtLeast(Duration.ZERO)
     }
     playerController.pauseWithRewind(fadeOutDuration)
-    playerController.setVolume(1F)
+    // playerController.setVolume(1F)
   }
 
   private fun updateVolumeForSleepTime() {
@@ -101,7 +101,7 @@ class SleepTimer
     }.coerceIn(0F, 1F)
 
     val volume = 1 - FastOutSlowInInterpolator().getInterpolation(1 - percentageOfTimeLeft)
-    playerController.setVolume(volume)
+    // playerController.setVolume(volume)
   }
 
   private suspend fun suspendUntilPlaying() {
