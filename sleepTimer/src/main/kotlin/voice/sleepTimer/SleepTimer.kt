@@ -36,7 +36,7 @@ class SleepTimer
 
   private val scope = MainScope()
   private val sleepTime: Duration get() = sleepTimePref.value.minutes
-  private val fadeOutDuration = 10.seconds
+  private val fadeOutDuration = 0.seconds //10.seconds
 
   private val _leftSleepTime = MutableStateFlow(Duration.ZERO)
   private var leftSleepTime: Duration
