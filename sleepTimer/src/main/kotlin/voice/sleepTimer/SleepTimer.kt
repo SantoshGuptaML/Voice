@@ -101,6 +101,8 @@ class SleepTimer
     }.coerceIn(0F, 1F)
 
     val volume = 1 - FastOutSlowInInterpolator().getInterpolation(1 - percentageOfTimeLeft)
+    Logger.d("Wait for $volume for a shake")
+    Logger.d("Wait for $percentageOfTimeLeft for a shake")
     // playerController.setVolume(volume)
   }
 
